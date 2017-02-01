@@ -4,6 +4,24 @@ import Vue from 'vue'
 import navbar from './components/Navbar'
 import router from './router'
 
+import auth from './auth'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:3000'
+
+// Response interceptor
+axios.interceptors.response.use((response) => {
+  return response
+}, function (error) {
+  // Do something with response errors
+  if (error.response.status === 401) {
+    console.log('unauthorized, logging out ...')
+    auth.logout()
+    router.replace('/login')
+  }
+  return Promise.reject(error)
+})
+
 /* eslint-disable no-new */
 new Vue({
   template: `

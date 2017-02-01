@@ -1,28 +1,39 @@
 <template lang="html">
-	<nav class="nav has-shadow">
-		<div class="nav-left">
-			<router-link href="" class="nav-item is-brand" to="/">
-				Vue Project
-			</router-link>
-			<router-link class="nav-item is-tab" to="/dashboard">
-				<i class="fa fa-dashboard"></i> Dashboard
-			</router-link>
-			<router-link href="" class="nav-item is-tab" to="/projects">
-				<i class="fa fa-list-alt"></i> Project List
-			</router-link>
-		</div>
-		<div class="nav-right">
-			<span class="nav-item">
-				<a href="" class="button">
-					Logout
-				</a>
-			</span>
-		</div>
-	</nav>
+  <nav class="nav has-shadow" v-if="isLoggedIn()">
+    <div class="nav-left">
+      <router-link href="" class="nav-item is-brand" to="/">
+        Vue Project
+      </router-link>
+      <router-link class="nav-item is-tab" to="/dashboard">
+        <i class="fa fa-dashboard"></i> Dashboard
+      </router-link>
+      <router-link href="" class="nav-item is-tab" to="/projects">
+        <i class="fa fa-list-alt"></i> Project List
+      </router-link>
+    </div>
+    <div class="nav-right">
+      <span class="nav-item">
+        <a href="" class="button" @click="logout()">
+          Logout
+        </a>
+      </span>
+    </div>
+  </nav>
 </template>
 
 <script>
-	export default{
-	  name: 'navbar'
-	}
+  import auth from '../auth'
+
+  export default {
+    name: 'navbar',
+    methods: {
+      logout () {
+        auth.logout()
+        this.$router.go('/login')
+      },
+      isLoggedIn () {
+        return auth.checkAuth()
+      }
+    }
+  }
 </script>
