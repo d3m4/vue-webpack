@@ -1,5 +1,7 @@
 /* eslint no-undef: "off" */
 
+import axios from 'axios'
+
 // set auth header on start up if token is present
 if (localStorage.getItem('id_token')) {
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token')

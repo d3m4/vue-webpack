@@ -14,12 +14,12 @@ app.use(cors())
 app.use('/secured', jwtCheck)
 
 // open call
-app.get('/ping', function(req, res) {
+app.get('/ping', function (req, res) {
   res.send("All good. You don't need to be authenticated to call this");
 })
 
 // secured call
-app.get('/secured/ping', function(req, res) {
+app.get('/secured/ping', function (req, res) {
   res.status(200).send("All good. You only get this message if you're authenticated");
 })
 
