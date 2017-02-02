@@ -1,20 +1,22 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import axios from 'axios'
+
 import navbar from './components/Navbar'
 import router from './router'
 import store from './store'
-
 import auth from './auth'
-import axios from 'axios'
 
+// set baseUrl from app
 axios.defaults.baseURL = 'http://localhost:3000'
 
-// Response interceptor
+// Response interceptor --> override responses
 axios.interceptors.response.use((response) => {
   return response
 }, function (error) {
   // Do something with response errors
+
   if (error.response.status === 401) {
     console.log('unauthorized, logging out ...')
     auth.logout()
