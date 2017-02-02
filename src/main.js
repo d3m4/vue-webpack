@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import navbar from './components/Navbar'
 import router from './router'
+import store from './store'
 
 import auth from './auth'
 import axios from 'axios'
@@ -35,5 +36,6 @@ new Vue({
     </div>
   `,
   router,
+  store,
   components: { navbar }
 }).$mount('#app')
